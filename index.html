@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Una pregunta para Naomi</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* Fondo guinda */
+      background: linear-gradient(135deg, #7b113a 0%, #ad1457 60%, #c2185b 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-heart {
+      position: absolute;
+      opacity: 0.10;
+      font-size: 11vw;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+      color: #fff6fa;
+      filter: drop-shadow(0 0 18px #fff6fa);
+    }
+    .bg-heart:nth-child(1) { left: 4vw; top: 12vh; animation-delay: 0s;}
+    .bg-heart:nth-child(2) { right: 8vw; top: 18vh; animation-delay: 2.5s;}
+    .bg-heart:nth-child(3) { left: 18vw; bottom: 14vh; animation-delay: 4.5s;}
+    .bg-heart:nth-child(4) { right: 15vw; bottom: 8vh; animation-delay: 5.5s;}
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1);}
+      50% { transform: translateY(-38px) scale(1.14);}
+    }
+    .card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 26px;
+      box-shadow: 0 6px 42px #630b3040;
+      padding: 40px 32px 38px 32px;
+      max-width: 390px;
+      text-align: center;
+      z-index: 10;
+      position: relative;
+      margin: 30px 10px;
+    }
+    .corazon {
+      font-size: 60px;
+      color: #b71c5a;
+      margin-bottom: 4px;
+      animation: latido 1.3s infinite;
+      filter: drop-shadow(0 2px 8px #ad1457);
+      user-select: none;
+    }
+    @keyframes latido {
+      0%, 100% { transform: scale(1);}
+      20% { transform: scale(1.18);}
+    }
+    h1 {
+      color: #ad1457;
+      font-size: 2.1em;
+      margin-bottom: 0.3em;
+      letter-spacing: 0.8px;
+      font-family: 'Montserrat', 'Segoe UI', sans-serif;
+    }
+    .nombre-naomi {
+      background: linear-gradient(90deg, #ad1457 0%, #c2185b 100%);
+      color: #fff;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 1.09em;
+      display: inline-block;
+      padding: 4px 14px;
+      box-shadow: 0 0 7px #c2185b80;
+      margin-left: 7px;
+      letter-spacing: 1px;
+    }
+    .mensaje {
+      font-size: 1.16em;
+      color: #4d4d4d;
+      margin-bottom: 40px;
+      margin-top: 14px;
+      line-height: 1.6;
+      font-family: 'Segoe UI', 'Montserrat', sans-serif;
+      background: rgba(250,250,250,0.85);
+      border-radius: 14px;
+      padding: 14px 10px 13px 10px;
+      box-shadow: 0 1.5px 11px #ad145712;
+      user-select: none;
+    }
+    .botones {
+      display: flex;
+      gap: 36px;
+      justify-content: center;
+      align-items: center;
+      min-height: 60px;
+      margin-bottom: 10px;
+      margin-top: 1.5em;
+      position: relative;
+      height: 80px;
+    }
+    button {
+      background: #ad1457;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 16px 44px;
+      font-size: 1.18em;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.18s, opacity 0.4s;
+      box-shadow: 0 4px 16px #ad145733;
+      font-family: inherit;
+      user-select: none;
+      position: relative;
+      z-index: 1;
+      outline: none;
+    }
+    button#siBtn {
+      background: linear-gradient(90deg, #b71c5a 40%, #ad1457 100%);
+      font-weight: 600;
+      letter-spacing: 1px;
+      border: 2.5px solid #fbc2ebbb;
+    }
+    button#noBtn {
+      background: #fff;
+      color: #b71c5a;
+      border: 2.5px solid #b71c5a;
+      font-weight: 500;
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+    .parpadeo {
+      animation: parpadeo 0.7s infinite alternate;
+    }
+    @keyframes parpadeo {
+      from { opacity: 1;}
+      to { opacity: 0.5;}
+    }
+    #intento {
+      font-size: 1em;
+      color: #b71c5a;
+      margin-top: 12px;
+      min-height: 23px;
+    }
+    #respuesta {
+      margin-top: 38px;
+      font-size: 1.47em;
+      color: #ad1457;
+      min-height: 48px;
+      transition: opacity 0.3s;
+      font-family: 'Segoe UI', 'Montserrat', sans-serif;
+      letter-spacing: 0.3px;
+    }
+    .card-final {
+      background: rgba(255,255,255,0.98);
+      border-radius: 28px;
+      box-shadow: 0 8px 36px #ad14577c;
+      padding: 44px 26px 38px 26px;
+      max-width: 430px;
+      text-align: center;
+      z-index: 11;
+      margin: 36px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.97);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    .emoji-fiesta {
+      font-size: 3.1em;
+      margin-bottom: 0.2em;
+      animation: bounce 1s infinite alternate;
+      filter: drop-shadow(0 1px 9px #ad1457a0);
+    }
+    @keyframes bounce {
+      from { transform: translateY(0);}
+      to { transform: translateY(-10px);}
+    }
+    .mensaje-final {
+      font-size: 1.25em;
+      color: #ad1457;
+      margin-bottom: 23px;
+      margin-top: 10px;
+      line-height: 1.6;
+      background: rgba(250,250,250,0.87);
+      border-radius: 14px;
+      padding: 14px 10px 13px 10px;
+      box-shadow: 0 1.5px 11px #ad145720;
+      user-select: none;
+    }
+    .firma {
+      color: #821040;
+      font-size: 1.14em;
+      margin-top: 26px;
+      font-family: 'Segoe Script', cursive;
+      letter-spacing: 0.6px;
+      opacity: 1;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .nombre-josue {
+      font-size: 1.32em;
+      color: #fff;
+      background: linear-gradient(90deg, #ad1457 0%, #b71c5a 100%);
+      border-radius: 16px;
+      padding: 6px 26px;
+      margin: 12px 0 0 0;
+      font-family: 'Segoe Script', cursive;
+      letter-spacing: 2px;
+      border: 2px solid #b71c5a;
+      box-shadow: 0 2px 15px #b71c5a66;
+      text-shadow: 0 1px 10px #ad1457a8, 0 1px 0 #fff;
+      transition: transform 0.2s;
+      animation: resaltado 1.4s infinite alternate;
+    }
+    @keyframes resaltado {
+      from { transform: scale(1);}
+      to { transform: scale(1.09);}
+    }
+    @media (max-width: 500px) {
+      .card, .card-final { padding: 20px 5vw; }
+      h1 { font-size: 1.1em;}
+      .mensaje, .mensaje-final { font-size: 1em;}
+      button { padding: 11px 12vw; font-size: 1em;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Corazones animados de fondo -->
+  <div class="bg-heart">💗</div>
+  <div class="bg-heart">💖</div>
+  <div class="bg-heart">💜</div>
+  <div class="bg-heart">💞</div>
+
+  <!-- PRIMERA PANTALLA -->
+  <div class="card" id="pantalla1">
+    <div class="corazon">💖</div>
+    <h1>
+      Tengo algo especial que preguntarte,
+      <span class="nombre-naomi">Naomi</span>
+    </h1>
+    <div class="mensaje">
+      No sé si alguna vez te lo han dicho así, pero desde que llegaste a mi vida, todo cambió para mejor.
+      <br>
+      De corazón, me encantaría que fueras mi novia, para compartir contigo momentos simples, reírnos juntos y crear recuerdos que sean sólo nuestros.<br>
+      ¿Te animas a dar este paso conmigo?
+    </div>
+    <div class="botones" id="botonesArea">
+      <button id="siBtn" class="parpadeo">¡Claro que sí! 💘</button>
+      <button id="noBtn">Mmm... no sé 😳</button>
+    </div>
+    <div id="intento"></div>
+    <div id="respuesta"></div>
+  </div>
+
+  <!-- SEGUNDA PANTALLA OCULTA POR DEFECTO -->
+  <div class="card-final" id="pantalla2" style="display:none">
+    <div class="emoji-fiesta">🎉🥰</div>
+    <div class="mensaje-final">
+      ¡Naomi, gracias por decir que sí!<br>
+      De verdad, me haces la persona más feliz del mundo.<br>
+      Prometo cuidar de ti, hacerte reír y siempre estar a tu lado, en lo bueno y en lo no tan bueno.<br>
+      <b>¡Empecemos juntos esta aventura! 💑</b>
+    </div>
+    <div class="firma">
+      Con mucho amor,
+      <span class="nombre-josue">Josue</span>
+      <span style="font-size:1.3em;">💌</span>
+    </div>
+  </div>
+
+  <script>
+    const siBtn = document.getElementById('siBtn');
+    const noBtn = document.getElementById('noBtn');
+    const respuesta = document.getElementById('respuesta');
+    const intento = document.getElementById('intento');
+    const pantalla1 = document.getElementById('pantalla1');
+    const pantalla2 = document.getElementById('pantalla2');
+    const botonesArea = document.getElementById('botonesArea');
+
+    let intentosRestantes = 3;
+    let noBtnOpacity = 1;
+
+    // Respuestas posibles para el botón "No"
+    const respuestasNo = [
+      "¿Estás segura Naomi? 😢",
+      "Piénsalo bien, no me rompas el corazón 🙈",
+      "Yo sí quiero intentarlo contigo 🥺",
+      "¿Y si mejor lo intentamos juntos? 💭",
+      "¡Vamos! Sería muy bonito vivir esto contigo 💕",
+      "¿Te imaginas todo lo que podríamos compartir? 🌟",
+      "Me harías muy feliz si dijeras que sí... 😌",
+      "Sé que en el fondo tú también lo quieres 😉",
+      "Dame una oportunidad, te prometo que no te arrepientes 💖",
+      "¡Ándale Naomi! 😁",
+      "No puedo rendirme tan fácil, eres demasiado especial 💗",
+      "No acepto un no por respuesta tan fácil 😜"
+    ];
+
+    // Textos diferentes para el botón "No"
+    const textosNo = [
+      "¿Estás segura? 😳",
+      "¿Lo pensaste bien? 🤔",
+      "¿De verdad no? 😥",
+      "¿Por qué no Naomi? 😭",
+      "¿En serio? 😬",
+      "¿Ni un poquito? 🥺",
+      "¿No te gustaría intentarlo? 💓",
+      "¿Y si lo intentamos? ✨",
+      "¿Seguro que no? 🤨",
+      "¿Me das otra oportunidad? 🤗",
+      "¿No te animas? 😶",
+      "¿Todavía no? 😅",
+      "¿Mejor sí? 😏",
+      "¿Una última vez? 🙃"
+    ];
+
+    function mostrarIntentos() {
+      if (intentosRestantes > 1) {
+        intento.innerHTML = `Intentos para pensarlo: <b>${intentosRestantes}</b> 😅`;
+      } else if (intentosRestantes === 1) {
+        intento.innerHTML = "¡Última oportunidad para pensarlo bien! 🙊";
+        noBtn.classList.add('parpadeo');
+      } else {
+        intento.innerHTML = "";
+      }
+    }
+    mostrarIntentos();
+
+    siBtn.onclick = () => {
+      pantalla1.style.display = 'none';
+      pantalla2.style.display = 'flex';
+    };
+
+    function getRandomPos() {
+      // Área de botones más grande para movimiento
+      const bodyRect = document.body.getBoundingClientRect();
+      const maxX = Math.max(bodyRect.width - noBtn.offsetWidth - 20, 80);
+      const minY = -80;
+      const maxY = 120;
+      const randX = Math.random() * maxX;
+      const randY = minY + Math.random() * (maxY - minY);
+      return { x: randX, y: randY };
+    }
+
+    function getRandomFromArray(arr, prevIdxObj) {
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * arr.length);
+      } while (arr.length > 1 && idx === prevIdxObj.idx);
+      prevIdxObj.idx = idx;
+      return arr[idx];
+    }
+
+    // Para evitar repetir la última
+    let prevRespuestaIdx = { idx: -1 };
+    let prevTextoNoIdx = { idx: -1 };
+
+    noBtn.onclick = () => {
+      if (intentosRestantes > 1) {
+        // Cambia texto y posición del botón "No"
+        noBtn.textContent = getRandomFromArray(textosNo, prevTextoNoIdx);
+
+        // Mueve el botón a una posición random en el área más amplia
+        const pos = getRandomPos();
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = `${pos.x}px`;
+        noBtn.style.top = `${window.innerHeight/2 + pos.y}px`;
+
+        // Disminuye opacidad
+        noBtnOpacity -= 0.32;
+        if (noBtnOpacity < 0.22) noBtnOpacity = 0.22;
+        noBtn.style.opacity = noBtnOpacity;
+
+        // Mensaje diferente cada vez
+        respuesta.innerHTML = getRandomFromArray(respuestasNo, prevRespuestaIdx);
+
+        intentosRestantes--;
+        mostrarIntentos();
+      } else if (intentosRestantes === 1) {
+        noBtn.style.opacity = 0.04;
+        respuesta.innerHTML = "Ya no puedes decir que no, ¡tienes que decir que sí! 😜";
+        intento.innerHTML = '';
+        setTimeout(() => {
+          noBtn.style.display = 'none';
+        }, 850);
+        intentosRestantes--;
+      }
+    };
+  </script>
+</body>
+</html>
